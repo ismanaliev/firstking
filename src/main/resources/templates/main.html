@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+ <head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <style>
+   .custom-btn{
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 8px 16px;
+
+    background: slateblue;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 5px;
+    text-decoration: none;
+    color: #fff;
+   }
+.btn-6{
+ font-size: 25px;
+    }
+  </style>
+  <style>body{
+    margin: 0;
+    padding: 0;
+    background: #2d3436;
+  }
+  .middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .btn{
+    position: relative;
+    display: block;
+    color: white;
+    font-size: 44px;
+    font-family: "montserrat";
+    text-decoration: none;
+    margin: 60px 0;
+    padding: 44px 100px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 1s all ease;
+  }
+  .btn::before{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translate(-100%,-100%);
+    z-index: -1;
+    transition: all 0.6s ease;
+  }
+
+        .react-ellipse.center {
+            transform: translate3d(-50%, -50%, 0);
+            animation: reactEllipseCenter 500ms ease-in-out backwards 500ms;
+        }
+
+        .react-ellipse.left {
+            transform: translate3d(-50%, -50%, 0) rotate(60deg);
+            animation: reactEllipseLeft 500ms ease-in-out backwards 1000ms;
+        }
+
+        .react-ellipse.right {
+            transform: translate3d(-50%, -50%, 0) rotate(-60deg);
+            animation: reactEllipseRight 500ms ease-in-out backwards 1000ms;
+        }
+
+
+        @keyframes reactCircle {
+            from {
+                transform: translate3d(-50%, -50%, 0) scale(0);
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) scale(1);
+            }
+        }
+
+        @keyframes reactEllipseCenter {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotateX(90deg);
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotateX(0deg);
+            }
+        }
+
+        @keyframes reactEllipseLeft {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotate(60deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes reactEllipseRight {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotate(-60deg);
+                opacity: 1;
+            }
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+            border: 0;
+        }
+        body {
+            background-image: url("https://avatars.dzeninfra.ru/get-zen_doc/177006/pub_625ddc9f72982049e9bd790e_625ddcd784d45f24eb26f28d/scale_1200");
+        );
+        );
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes text {
+            0%{
+                color: black;
+                margin-bottom: -40px;
+            }
+            30%{
+                letter-spacing: 25px;
+                margin-bottom: -40px;
+            }
+            85%{
+                letter-spacing: 8px;
+                margin-bottom: -40px;
+            }
+
+        }
+        .btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn--md{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<br><br><br><br><br> <br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br>
+<a class="btn btn--md" href="/companies" sec:authorize="hasAuthority('ADMIN')">Companies</a>
+<a class="btn btn--md" href="/courses" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')">Courses</a>
+<a class="btn btn--md" href="/groups" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')">Groups</a>
+<a class="btn btn--md" href="/teachers" sec:authorize="hasAuthority('ADMIN')">Teachers</a>
+<a class="btn btn--md" href="/students" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')">Students</a>
+<a th:href="@{/users/users}" sec:authorize="hasAuthority('ADMIN')" class="custom-btn btn-6" >Users</a>
+<a th:href="@{/users/profile}" class="custom-btn btn-6">Profile</a>
+<a th:href="@{/logout}" class="custom-btn btn-6">Log out</a>
+</body>
+</html>

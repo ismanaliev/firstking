@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn--md{
+            font-size: 20px;
+        }
+    </style>
+    <style>
+
+        body {
+            background-image: url("https://www.eltbuzz.com/wp-content/uploads/2020/04/concerns-1585857699-1280x567.jpg");
+        );
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes text {
+            0%{
+                color: black;
+                margin-bottom: -40px;
+            }
+            30%{
+                letter-spacing: 25px;
+                margin-bottom: -40px;
+            }
+            85%{
+                letter-spacing: 8px;
+                margin-bottom: -40px;
+            }
+
+        }
+        .custom-btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn-6{
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header" role="heading">
+    <a th:href="@{companies}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="btn btn--md"><span>Companies</span></button></font></a>
+    <a th:href="@{groups}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="btn btn--md"><span>Groups</span></button></font></a>
+    <a th:href="@{students}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="btn btn--md"><span>Students</span></button></font></a>
+    <a th:href="@{teachers}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="btn btn--md"><span>Teachers</span></button></font></a>
+    <br>
+    <br>
+    <h1 style="color: white" align="center">Companies</h1>
+
+</div>
+<br>
+</header>
+<table class="table" >
+    <thead>
+    <tr >
+        <th scope="col">Id</th>
+        <th scope="col" >Company Name</th>
+        <th scope="col" >Located Country</th>
+        <th scope="col" >Courses</th>
+        <th scope="col" >Students</th>
+        <th scope="col" >Update</th>
+        <th scope="col" >Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="company:${companies}">
+        <td th:text="${company.id}"></td>
+        <td th:text="${company.companyName}"></td>
+        <td th:text="${company.locatedCountry}"></td>
+        <td><a th:href="@{/companies/courses/{id}(id=${company.id})}"><button class="custom-btn btn-6"><span>Courses</span></button></a> </td>
+        <td><a th:href="@{/companies/students/{id}(id=${company.id})}"><button class="custom-btn btn-6"><span>Students</span></button></a> </td>
+        <td><a th:href="@{/companies/update/{id}(id=${company.id})}"><button class="custom-btn btn-6"><span>update</span></button></a></td>
+        <td><form th:method="GET" th:action="@{/companies/delete/{id}(id=${company.getId()})}"><button class="custom-btn btn-6"><span>Delete</span></button></form></td>
+    </tr>
+    </tbody>
+</table>
+<br><br>
+<a  href="/companies/addCompany"><button class="custom-btn btn-6" ><span>add</span></button></a>
+<a href="/"><button class="custom-btn btn-6"><span>back</span></button></a>
+</body>
+
+</html>

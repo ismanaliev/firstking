@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        body {
+        background: url("https://i.ytimg.com/vi/jAZDIZ0SnYE/maxresdefault.jpg");
+        background-size: 1400px 700px;
+        background-position: 30%;
+        background-attachment: fixed;
+    }
+
+
+    .text {
+        font-family: raleway;
+        font-size: 40px;
+        position: center;
+        text-align: center;
+        padding-left: 0%;
+        color: #000;
+        margin-top: 43px;
+    }
+
+    .text1 {
+        font-family: raleway;
+        font-size: 21px;
+        text-align: center;
+        margin-top: -20px;
+        color: #000;
+    }
+
+    .image {
+        text-align: center;
+        width: 200px;
+        /* Container's dimensions */
+
+        height: 200px;
+        -webkit-border-radius: 75%;
+        -moz-border-radius: 75%;
+        box-shadow: 0 0 0 1px #eee;
+        background: url(https://images.wallpaperscraft.ru/image/single/chelovek_profil_siluet_krug_118321_1600x1200.jpg) center center no-repeat;
+        background-size: cover;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: -30px;
+        align-content: center;
+    }
+
+    .trick {
+        display: inline-block;
+        vertical-align: middle;
+        height: 150px;
+    }
+
+    .image:hover {
+        box-shadow: 0px 5px 20px .9px #3F3F3F;
+    }
+
+    .image:hover {
+        -webkit-transform: scale(1.12);
+        transform: scale(1.12);
+        -webkit-transition: 1.6s ease-in-out;
+        transition: 1.6s ease-in-out;
+    }
+
+    .trick:hover img {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    #overlay {
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        padding: 0 0 0 0;
+        opacity: 1.0;
+        -webkit-transition: opacity 2.25s ease;
+        -moz-transition: opacity 10.25s ease;
+    }
+
+    #box:hover #overlay {
+        opacity: 1;
+    }
+
+
+
+
+
+    .panel-group{
+        width:350px;
+        margin: auto;
+        /*margin:50px 400px 50px 400px;*/
+        max-width:100%;
+    }
+
+    .panel-heading{
+        background-color:transparent !important;
+    }
+
+    .title{
+        text-align: center;
+        background-color:transparent;
+        color:#000;
+        font-family:lato;
+        font-weight:300;
+        font-size:15px;
+        max-width:100%;
+    }
+
+
+
+
+    #accordion{
+        background-color: transparent;
+        max-width:100%;
+        margin-bottom:200px;
+    }
+    .btn-outline {
+        color: inherit;
+        transition: all 1.4s;
+        background-color: transparent;
+    }
+    /* button CSS */
+
+    .btn-danger.btn-outline {
+        margin-top: 9px;
+        background-color: transparent;
+        color: #000;
+        border-color: #000;
+        padding: initial;
+        padding: 10px 0px 10px 0px;
+        margin: 1px 5px 1px 0px;
+        width: 100%;
+        text-align: center;
+        font-family: raleway;
+        font-weight: 300;
+        max-width: 100%;
+    }
+
+    /*---------    Contact Form    ------------*/
+
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+        color: #000;
+        font-size: 15px;
+    }
+    /* on hover placeholder */
+
+    input:hover::-webkit-input-placeholder,
+    textarea:hover::-webkit-input-placeholder {
+        color: #fff;
+        font-size: 15px;
+        font-family: raleway;
+    }
+
+    input:hover:focus::-webkit-input-placeholder,
+    textarea:hover:focus::-webkit-input-placeholder {
+        color: #fff;
+        font-family: raleway;
+    }
+
+    input:hover::-moz-placeholder,
+    textarea:hover::-moz-placeholder {
+        color: #fff;
+        font-size: 15px;
+        font-family: raleway;
+    }
+
+    input:hover:focus::-moz-placeholder,
+    textarea:hover:focus::-moz-placeholder {
+        color: #fff;
+        font-family: raleway;
+    }
+
+    input:hover::placeholder,
+    textarea:hover::placeholder {
+        color: #fff;
+        font-size: 15px;
+        font-family: raleway;
+    }
+
+    input:hover:focus::placeholder,
+    textarea:hover:focus::placeholder {
+        color: #fff;
+        font-family: raleway;
+    }
+
+    input:hover::placeholder,
+    textarea:hover::placeholder {
+        color: #fff;
+        font-size: 15px;
+        font-family: raleway;
+    }
+
+
+    #form {
+        position: relative;
+        width: 100%;
+        margin: 0px auto 0px auto;
+        font-family: raleway;
+    }
+
+    input {
+        font-family: raleway;
+        font-size: 15px;
+        width: 100%;
+        height: 50px;
+        padding: 0px 12px 0px 12px;
+        background: transparent;
+        outline: none;
+        color: #726659;
+        border: solid 1px #eee;
+        border-bottom: none;
+        transition: all 0.9s ease-in-out;
+        -webkit-transition: all 0.9s ease-in-out;
+        -moz-transition: all 0.9s ease-in-out;
+        -ms-transition: all 0.9s ease-in-out;
+    }
+
+    input:hover {
+        background: #ccc;
+        color: #fff;
+        font-family: raleway;
+    }
+
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        height: 110px;
+        max-height: 110px;
+        padding: 15px;
+        background: transparent;
+        outline: none;
+        color: #000;
+        font-family: raleway;
+        font-size: 25px;
+        border: solid 1px #eee;
+        transition: all 0.9s ease-in-out;
+        -webkit-transition: all 0.9s ease-in-out;
+        -moz-transition: all 0.9s ease-in-out;
+        -ms-transition: all 0.9s ease-in-out;
+    }
+
+    textarea:hover {
+        background: #ccc;
+        color: #fff;
+        font-family: raleway;
+    }
+
+    #submit {
+        width: 100%;
+        padding: 0;
+        font-family: raleway;
+        font-size: 20px;
+        color: #000;
+        outline: none;
+        cursor: pointer;
+        border: solid 1px #eee;
+        border-top: none;
+        margin-bottom: 0px;
+    }
+
+    #submit:hover {
+        color: #fff;
+        background-color: #ccc;
+    }</style>
+    <style>
+        .custom-btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn-6 {
+            font-size: 15px;
+        }
+    .btn-6 span {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .btn-6:before,
+    .btn-6:after {
+        position: absolute;
+        content: "";
+        height: 0%;
+        width: 1px;
+        box-shadow:
+                -1px -1px 20px 0px rgba(255,255,255,1),
+                -4px -4px 5px 0px rgba(255,255,255,1),
+                7px 7px 20px 0px rgba(0,0,0,.4),
+                4px 4px 5px 0px rgba(0,0,0,.3);
+    }
+    .btn-6:before {
+        right: 0;
+        top: 0;
+        transition: all 500ms ease;
+    }
+    .btn-6:after {
+        left: 0;
+        bottom: 0;
+        transition: all 500ms ease;
+    }
+    .btn-6:hover{
+        background: transparent;
+        color: #76aef1;
+        box-shadow: none;
+    }
+    .btn-6:hover:before {
+        transition: all 500ms ease;
+        height: 100%;
+    }
+    .btn-6:hover:after {
+        transition: all 500ms ease;
+        height: 100%;
+    }
+    .btn-6 span:before,
+    .btn-6 span:after {
+        position: absolute;
+        content: "";
+        box-shadow:
+                -1px -1px 20px 0px rgba(255,255,255,1),
+                -4px -4px 5px 0px rgba(255,255,255,1),
+                7px 7px 20px 0px rgba(0,0,0,.4),
+                4px 4px 5px 0px rgba(0,0,0,.3);
+    }
+    .btn-6 span:before {
+        left: 0;
+        top: 0;
+        width: 0%;
+        height: .5px;
+        transition: all 500ms ease;
+    }
+    .btn-6 span:after {
+        right: 0;
+        bottom: 0;
+        width: 0%;
+        height: 5px;
+        transition: all 500ms ease;
+    }
+    .btn-6 span:hover:before {
+        width: 100%;
+    }
+    .btn-6 span:hover:after {
+        width: 100%;
+    }</style>
+</head>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="box">
+    <div id="overlay">
+        <div class="image">
+            <div class="trick">
+            </div>
+        </div>
+        <br><br><br>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading " role="tab" id="headingOne">
+
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div th:object="${user}">
+                           <h2><font color="#6495ed"> Id:</font></h2> <h2 th:text="*{id}"></h2>
+                            <h2><font color="#6495ed">Name:</font></h2><h2 th:text="*{username}"></h2>
+                            <h2><font color="#6495ed">Last Name: </font></h2><h2 th:text="*{lastname}"></h2>
+                            <h2><font color="#6495ed">Age: </font></h2><h2 th:text="*{age}"></h2>
+                            <h2><font color="#6495ed">Email: </font></h2><h2 th:text="*{email}"></h2>
+                            <!--    <h2 th:text="*{roles}"></h2>-->
+                            <h2><font color="#6495ed">Role Name:</font></h2><h3 sec:authentication="principal.authorities"></h3>
+                    </div>
+                </div>
+            </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <form id="form" class="topBefore">
+                            <input id="name" type="text" placeholder="NAME">
+                            <input id="email" type="text" placeholder="E-MAIL">
+                            <textarea id="message" type="text" placeholder="MESSAGE"></textarea>
+                            <input id="submit" type="submit" value="Submit Now!">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+<br>
+
+</body>
+</html>

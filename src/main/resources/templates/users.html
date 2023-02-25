@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" >
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .custom-btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn-6{
+            font-size: 15px;
+        }
+    </style>
+
+    <style>
+
+        body {
+            background-image: url("https://www.eltbuzz.com/wp-content/uploads/2020/04/concerns-1585857699-1280x567.jpg");
+        );
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes text {
+            0%{
+                color: black;
+                margin-bottom: -40px;
+            }
+            30%{
+                letter-spacing: 25px;
+                margin-bottom: -40px;
+            }
+            85%{
+                letter-spacing: 8px;
+                margin-bottom: -40px;
+            }
+
+        }
+        .btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn--md{
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+<table  class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">User's name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col"> Email</th>
+        <th scope="col"> Age </th>
+        <th scope="col"> Role Name</th>
+        <th scope="col">Update</th>
+        <th scope="col">delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.lastname}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.roles}"></td>
+        <td><a th:href="@{/users/update/{id}(id=${user.id})}"><button class="custom-btn btn-6"><span>update</span></button></a></td>
+        <td>
+            <form th:method="GET" th:action="@{/users/delete/{id}(id=${user.getId()})}" sec:authorize="hasAuthority('ADMIN')"
+            ><button class="custom-btn btn-6"><span>Delete</span></button></form></td>
+    </tr>
+    </tbody>
+    <!--    <button href="/saveUser" value="ADD" sec:authorize="hasAuthority('ADMIN')"></button>-->
+    <!--    <a th:href="@{/users/saveUser}" sec:authorize="hasAuthority('ADMIN')"><font th:size="10"><button class="custom-btn btn-6"><span>add</span></button></font></a>-->
+</table>
+
+<a  href="/users/addUser" ><button class="custom-btn btn-6"><span>add</span></button></a>
+<a href="/"><button class="custom-btn btn-6"><span>go back</span></button></a>
+
+</body>
+</html>

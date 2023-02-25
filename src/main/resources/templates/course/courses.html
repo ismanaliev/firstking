@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn--md{
+            font-size: 15px;
+        }
+    </style>
+    <style>
+        body {
+            background-image: url("https://www.eltbuzz.com/wp-content/uploads/2020/04/concerns-1585857699-1280x567.jpg");
+        );
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes text {
+            0%{
+                color: black;
+                margin-bottom: -40px;
+            }
+            30%{
+                letter-spacing: 25px;
+                margin-bottom: -40px;
+            }
+            85%{
+                letter-spacing: 8px;
+                margin-bottom: -40px;
+            }
+
+        }
+        .custom-btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn-6{
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+<header>
+    <div class="header" role="heading">
+        <a th:href="@{companies}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="custom-btn btn-6"><span>Companies</span></button></font></a>
+        <a th:href="@{courses}" sec:authorize="hasAuthority('ADMIN,INSTRUCTOR')"><font th:size="5"><button class="custom-btn btn-6"><span>Courses</span></button></font></a>
+        <a th:href="@{groups}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="custom-btn btn-6"><span>Groups</span></button></font></a>
+        <a th:href="@{students}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="custom-btn btn-6"><span>Students</span></button></font></a>
+        <a th:href="@{teachers}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="custom-btn btn-6"><span>Teachers</span></button></font></a>
+
+        <h1 style="color: white" align="center">Courses</h1>
+
+    </div>
+    <br>
+</header>
+<table class="table" >
+    <thead>
+    <tr >
+        <th scope="col">Id</th>
+        <th scope="col">Course's name</th>
+        <th scope="col">Duration month</th>
+        <th scope="col">Company's name</th>
+        <th scope="col">Groups</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Update</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course:${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${course.durationMonth}"></td>
+                <td th:text="${course.company.companyName}"></td>
+        <td><a th:href="@{courses/groups/{id}(id=${course.id})}"><button class="btn btn--md">Groups</button></a></td>
+        <td><a th:href="@{/courses/update/{id}(id=${course.id})}" sec:authorize="hasAuthority('ADMIN')"><button class="btn btn--md"><span>update</span></button></a></td>
+        <td><form th:method="GET" th:action="@{/courses/delete/{id}(id=${course.id})}" sec:authorize="hasAuthority('ADMIN')"><button class="btn btn--md">delete</button></form></td>
+    </tr>
+    </tbody>
+    </tr>
+    </tbody>
+</table>
+<br><br><br><br>
+<br><br><br><br>
+<a  href="/courses/addCourse"><button class="btn btn--md" sec:authorize="hasAuthority('ADMIN')"><span>add</span></button></a>
+<a href="/"><button class="btn btn--md"><span>go back</span></button></a>
+<br><br><br>
+</body>
+</html>

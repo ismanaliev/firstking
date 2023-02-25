@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .custom-btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn-6{
+            font-size: 15px;
+        }
+    </style>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background: #2d3436;
+        }
+        .middle{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .btn{
+            position: relative;
+            display: block;
+            color: white;
+            font-size: 44px;
+            font-family: "montserrat";
+            text-decoration: none;
+            margin: 60px 0;
+            padding: 44px 100px;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: 1s all ease;
+        }
+        .btn::before{
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 100%;
+            transform: translate(-100%,-100%);
+            z-index: -1;
+            transition: all 0.6s ease;
+        }
+
+        .react-ellipse.center {
+            transform: translate3d(-50%, -50%, 0);
+            animation: reactEllipseCenter 500ms ease-in-out backwards 500ms;
+        }
+
+        .react-ellipse.left {
+            transform: translate3d(-50%, -50%, 0) rotate(60deg);
+            animation: reactEllipseLeft 500ms ease-in-out backwards 1000ms;
+        }
+
+        .react-ellipse.right {
+            transform: translate3d(-50%, -50%, 0) rotate(-60deg);
+            animation: reactEllipseRight 500ms ease-in-out backwards 1000ms;
+        }
+
+
+        @keyframes reactCircle {
+            from {
+                transform: translate3d(-50%, -50%, 0) scale(0);
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) scale(1);
+            }
+        }
+
+        @keyframes reactEllipseCenter {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotateX(90deg);
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotateX(0deg);
+            }
+        }
+
+        @keyframes reactEllipseLeft {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotate(60deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes reactEllipseRight {
+            from {
+                transform: translate3d(-50%, -50%, 0) rotate(0deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate3d(-50%, -50%, 0) rotate(-60deg);
+                opacity: 1;
+            }
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+            border: 0;
+        }
+        body {
+            background-image: url("https://telegra.ph/file/7b88cbda3f3b99f71ffa6.jpg");
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        @keyframes text {
+            0%{
+                color: black;
+                margin-bottom: -40px;
+            }
+            30%{
+                letter-spacing: 25px;
+                margin-bottom: -40px;
+            }
+            85%{
+                letter-spacing: 8px;
+                margin-bottom: -40px;
+            }
+
+        }
+        .btn{
+            text-align: right;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 8px 16px;
+
+            background: slateblue;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 5px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .btn--md{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header" role="heading">
+        <a th:href="@{companies}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="btn btn--md"><span>Companies</span></button></font></a>
+        <a th:href="@{courses}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="btn btn--md"><span>Courses</span></button></font></a>
+        <a th:href="@{groups}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="btn btn--md"><span>Groups</span></button></font></a>
+        <a th:href="@{students}" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')"><font th:size="5"><button class="btn btn--md"><span>Students</span></button></font></a>
+        <a th:href="@{teachers}" sec:authorize="hasAuthority('ADMIN')"><font th:size="5"><button class="btn btn--md"><span>Teachers</span></button></font></a>
+        <h1 style="color: white" align="center">Groups</h1>
+    </div>
+</header>
+<table class="table" >
+    <thead>
+    <tr >
+        <th scope="col">#</th>
+        <th scope="col">Group's name</th>
+        <th scope="col">Date of start</th>
+        <th scope="col">Date of finish</th>
+        <th scope="col">Courses</th>
+        <th scope="col">Students</th>
+        <th scope="col">update</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group:${groups}">
+        <td th:text="${group.id}"></td>
+        <td th:text="${group.groupName}"></td>
+        <td th:text="${group.dateOfStart}"></td>
+        <td th:text="${group.dateOfFinish}"></td>
+        <td><a th:href="@{/groups/courses/{id}(id=${group.id})}"><button class="custom-btn btn-6"><span>Courses</span></button></a> </td>
+        <td><a th:href="@{/groups/students/{id}(id=${group.id})}"><button class="custom-btn btn-6"><span>Students</span></button></a> </td>
+        <td><a th:href="@{/groups/update/{id}(id=${group.id})}"><button class="custom-btn btn-6"><span>update</span></button></a></td>
+       <td> <form th:method="GET" th:action="@{/groups/delete/{id}(id=${group.getId()})}" sec:authorize="hasAuthority('ADMIN')"
+        ><button class="custom-btn btn-6"><span>delete</span></button></form></td>
+    </tr>
+    </tbody>
+</table>
+<a  href="/groups/addGroup" sec:authorize="hasAuthority('ADMIN')"><button class="custom-btn btn-6"><span>add</span></button></a>
+<a href="/" ><button class="custom-btn btn-6"><span>go back</span></button></a>
+</body>
+</html>
